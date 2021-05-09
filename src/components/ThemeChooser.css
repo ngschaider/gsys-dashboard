@@ -1,0 +1,7 @@
+.ThemeChooser {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	float: right;
+	z-index: 999;
+}
