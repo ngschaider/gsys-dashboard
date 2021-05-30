@@ -1,30 +1,33 @@
 import { useForm } from "../../utils/hooks";
-import { DataContext, dataSource } from "../../data/DataContext";
-import { useContext } from "react";
+import { getData, setData } from "../../data/DataManager";
 
 const GreetingSettings = () => {
-	const appData = useContext(DataContext);
+	const data = getData();
 
-	const { values, onChange, onSubmit } = useForm(appData.greeting, () => {
-		appData.greeting.message = values.message;
-		appData.greeting.smallHeader = values.smallHeader;
-		dataSource.setData(appData);
+	const { values, onChange, onSubmit } = useForm(data.greeting, () => {
+		const newData = {
+			...data,
+			greeting: {
+				message: values.message,
+				smallHeader: values.smallHeader,
+			}
+		}
+		setData(newData);
 	});
 
 	return (
 		<>
-			<h2>Einstellungen: Begrüßung</h2>
 			<form onSubmit={onSubmit}>
-				<br />
 				<span>Kleine Überschrift</span>
 				<br />
 				<input value={values.smallHeader} onChange={onChange} name="smallHeader" />
 				<br />
 				<br />
-				<br />
 				<span>Nachricht</span>
 				<br />
 				<input value={values.message} onChange={onChange} name="message" />
+				<br />
+				<br />
 				<input type="submit" value="Speichern" />
 			</form>
 		</>

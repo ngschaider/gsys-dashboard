@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import { DataContext } from "../data/DataContext";
+import { getData } from "../data/DataManager";
 
 const Bookmarks = () => {
-	const { bookmarkCategories, bookmarks } = useContext(DataContext);
+	const { bookmarkCategories, bookmarks } = getData();
 
 	if (bookmarks.length === 0) return null;
 

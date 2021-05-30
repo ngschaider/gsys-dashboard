@@ -1,3 +1,14 @@
+export type DataSourceConfig = {
+	driver: string;
+
+	// localStorage
+	storageKey?: string;
+
+	// server
+	address?: string;
+	token?: string;
+}
+
 type BookmarkConfig = {
 	url: string;
 	name: string;
@@ -25,6 +36,8 @@ type Theme = {
 
 }
 
+export type ReplacerConfig = Record<string, string>;
+
 export type AppData = {
 	bookmarkCategories: Category[];
 	themes: Theme[];
@@ -34,24 +47,9 @@ export type AppData = {
 	replacer: ReplacerConfig;
 };
 
-export type ReplacerConfig = Record<string, string>;
 
 export class DataSource {
-	public getDefaults(): AppData {
-		return {
-			bookmarkCategories: [],
-			bookmarks: [],
-			apps: [],
-			greeting: {
-				smallHeader: "{date}",
-				message: "Hello"
-			},
-			replacer: {},
-			themes: []
-		};
-	}
-
-	public getData(): AppData {
+	public getData(): AppData|null {
 		throw new Error("Not implemented");
 	}
 

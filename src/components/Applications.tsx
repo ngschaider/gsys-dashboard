@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Icon from "@iconify/react";
 import home from "@iconify/icons-mdi/home";
 
-import { DataContext } from "../data/DataContext";
+import { getData } from "../data/DataManager";
 
 const Applications = () => {
-	const { apps } = useContext(DataContext);
+	const { apps } = getData();
 
 	if (apps.length === 0) return null;
 

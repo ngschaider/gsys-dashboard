@@ -4,10 +4,7 @@ export const useForm = <T>(initialValues: T, onSubmitCb?: (values: T) => void, o
 	const [values, setValues] = useState(initialValues);
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setValues({
-			...values,
-			[e.target.name]: e.target.value
-		});
+		setValue(e.target.name, e.target.value);
 		onChangeCb?.(values);
 	};
 
@@ -16,9 +13,23 @@ export const useForm = <T>(initialValues: T, onSubmitCb?: (values: T) => void, o
 		onSubmitCb?.(values);
 	};
 
+	const setValue = (key: string, value: string) => {
+		setValues({
+			...values,
+			[key]: value
+		});
+	}
+
+	const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		setValue(e.target.name, e.target.value);
+		onChangeCb?.(values);
+	}
+
 	return {
 		values,
 		onChange,
-		onSubmit
+		onSubmit,
+		setValue,
+		onSelectChange,
 	};
 };

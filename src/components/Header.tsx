@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { DataContext } from "../data/DataContext";
+import { getData } from "../data/DataManager";
 import { replaceAll } from "../utils/replace";
 import "./Header.css"
 
 const Header = () => {
-	const { greeting, replacer } = useContext(DataContext);
+	const { greeting, replacer } = getData();
 	
 	const formattedGreeting = replaceAll(greeting.message, replacer);
 	const formattedSmallHeader = replaceAll(greeting.smallHeader, replacer);

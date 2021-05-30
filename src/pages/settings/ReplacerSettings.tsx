@@ -1,4 +1,6 @@
 const ReplacerSettings = () => {
-	return <h2>Replacer</h2>;
+	return (
+		<div></div>
+	);
 };
 export default ReplacerSettings;

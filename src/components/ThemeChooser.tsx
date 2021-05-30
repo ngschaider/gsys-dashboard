@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
 import "./ThemeChooser.css";
-import { DataContext } from "../data/DataContext";
+import { getData } from "../data/DataManager";
 
 const ThemeChooser = () => {
 	/* const [hidden, setHidden] = useState(true)
-	const { themes } = useContext(DataContext);
+	const { themes } = getData();
 
 	const toggleDropdown = () => {
 		setHidden(!hidden);

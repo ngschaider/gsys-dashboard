@@ -1,4 +1,6 @@
 const GeneralSettings = () => {
-	return <h2>General</h2>;
+	return (
+		<div></div>
+	);
 };
 export default GeneralSettings;
