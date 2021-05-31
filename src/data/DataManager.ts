@@ -1,67 +1,37 @@
+import EventEmitter from "events";
+import { runInThisContext } from "vm";
 import API from "../API";
-import { AppData, DataSource, DataSourceConfig } from "./DataSource";
-import LocalStorageDataSource from "./LocalStorageDataSource";
-import ServerDataSource from "./ServerDataSource";
+import { AppData } from "./DataSource";
 
-export const setConfig = (config: DataSourceConfig) => {
-    API.baseUrl = config.address;
-    localStorage.setItem("dataSourceConfig", JSON.stringify(config));
-    dataSource = getNewDataSource(config);
-}
-
-export const getConfig = (): DataSourceConfig => {
-    const configStr = localStorage.getItem("dataSourceConfig");
-
-    if(!configStr) {
-        const defaultConfig: DataSourceConfig = {
-            driver: "localStorage",
-            storageKey: "appData"
-        }
-        localStorage.setItem("dataSourceConfig", JSON.stringify(defaultConfig));
-        return defaultConfig;
-    } else {
-        return JSON.parse(configStr);
-    }
-}
-
-export const getNewDataSource = (config: DataSourceConfig): DataSource => {
-    if(config.driver === "server") {
-        return new ServerDataSource();
-    }
-
-    return new LocalStorageDataSource(config);
-}
-
-export const getDefaultData = () => {
-    return {
-        bookmarkCategories: [],
-        bookmarks: [],
-        apps: [],
-        greeting: {
-            smallHeader: "{date}",
-            message: "Hello"
-        },
-        replacer: {},
-        themes: []
-    };
-}
-
-export const getData = () => {
-    const defaults = getDefaultData();
-    const data = dataSource.getData();
-
-    if(!data) {
-        setData(defaults);
-        return defaults;
-    }
-
-    return data;
+const defaultData = {
+    bookmarkCategories: [],
+    bookmarks: [],
+    apps: [],
+    greeting: {
+        smallHeader: "{date}",
+        message: "Hello"
+    },
+    replacer: {},
+    themes: []
 };
 
-export const setData = (data: AppData) => {
-    dataSource.setData(data);
+class DataManager extends EventEmitter {
+
+    public data: AppData = defaultData;
+
+
+    public async refresh() {
+        const res = await API.getDashboardData();
+        if(res.type === "success" && res.data) {
+            this.data = res.data;
+        }
+    }
+
+    public async save() {
+        if(!this.data) return;
+        await API.setDashboardData(this.data);
+    }
+
 }
 
-
-const config = getConfig();
-let dataSource = getNewDataSource(config);
+export default DataManager;

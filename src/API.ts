@@ -1,4 +1,4 @@
-import { getConfig } from "./data/DataManager"
+
 import { buildQueryString } from "./utils/query"
 
 type APIResponse = {
@@ -52,34 +52,29 @@ export type UsersResponse = APIResponse & {
     users?: UserData[];
 }
 
+export type DashboardResponse = APIResponse & {
+    data?: AppData;
+}
+
 class API {
-    private static _baseUrl: string|undefined;
-
-    public static get baseUrl() {
-        return this._baseUrl ?? getConfig().address;
-    }
-    public static set baseUrl(url: string|undefined) {
-        this._baseUrl = url;
-    }
+    private static baseUrl = "https://api.gsys.at";
 
 
-    //#region AuthController
-
-    public static async login(data: LoginInput): Promise<LoginResponse> {
-        const res = await this.request("/auth/login" + buildQueryString(data));
-
+    public static async getDashboardData(): Promise<DashboardResponse> {
+        const res = await this.request("/user/dashboard");
         return this.prepareOutput(res);
     }
 
-    public static async logout(): Promise<APIResponse> {
-        const res = await this.request("/auth/logout");
-
+    public static async setDashboardData(data: AppData): Promise<APIResponse> {
+        const res = await this.request("/user/dashboard", {
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "post",
+        });
         return this.prepareOutput(res);
     }
-
-    //#endregion
-
-    //#region UserController
 
     /**
      * Requests the user who's currently logged in.
@@ -89,55 +84,6 @@ class API {
         return this.prepareOutput(res);
     }
 
-    public static async deleteUser(id: string): Promise<APIResponse> {
-        const res = await this.request("/user/delete/" + encodeURIComponent(id));
-        return this.prepareOutput(res);
-    }
-
-    /**
-     * Creates a new user
-     * @param data Data for the new user.
-     */
-    public static async createUser(data: CreateUserInput): Promise<UserResponse> {
-        const res = await this.request("/user", {
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: "post",
-        });
-        return this.prepareOutput(res);
-    }
-
-    public static async updateUser(id: string, data: UpdateUserInput): Promise<UserResponse> {
-        const res = await this.request("/user/update/" + id, {
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: "post",
-        });
-        return this.prepareOutput(res);
-    }
-
-    /**
-     * Gets all users' data
-     */
-    public static async getUsers(): Promise<UsersResponse> {
-        const res = await this.request("/user");
-        return this.prepareOutput(res);
-    }
-
-    /**
-     * Gets a single user's data.
-     * @param id ID of the user
-     */
-    public static async getUser(id: string): Promise<UserResponse> {
-        const res = await this.request("/user/" + encodeURIComponent(id));
-        return this.prepareOutput(res);
-    }
-
-    //#endregion
 
 
     //#region Private Helper Functions

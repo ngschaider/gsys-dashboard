@@ -33,3 +33,8 @@ export const useForm = <T>(initialValues: T, onSubmitCb?: (values: T) => void, o
 		onSelectChange,
 	};
 };
+
+
+export const useData = () => {
+	
+}
