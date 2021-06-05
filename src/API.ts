@@ -1,18 +1,10 @@
 
-import { buildQueryString } from "./utils/query"
+import { AppData } from "./data/DataManager"
 
 type APIResponse = {
     type: "error" | "success";
     message?: string;
     code?: string;
-}
-
-export type LoginInput = {
-    usernameOrEmail: string,
-    password: string;
-}
-type LoginResponse = APIResponse & {
-    token?: string;
 }
 
 export type UserData = {
@@ -25,31 +17,8 @@ export type UserData = {
     isAdmin: boolean;
 }
 
-export type CreateUserInput = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    username: string;
-    password: string;
-    changePasswordOnLogin: boolean;
-    isAdmin: boolean;
-}
-
-export type UpdateUserInput = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    username: string;
-    changePasswordOnLogin: boolean;
-    isAdmin: boolean;
-}
-
 export type UserResponse = APIResponse & {
     user?: UserData;
-}
-
-export type UsersResponse = APIResponse & {
-    users?: UserData[];
 }
 
 export type DashboardResponse = APIResponse & {

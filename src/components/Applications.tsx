@@ -1,26 +1,26 @@
 import React from "react";
-import Icon from "@iconify/react";
-import home from "@iconify/icons-mdi/home";
-
-import { getData } from "../data/DataManager";
+import "./Applications.css"
+import { DataContext } from "../data/DataContext";
+import { useGenericContext } from "../utils/hooks";
+import DynamicIcon from "./DynamicIcon";
 
 const Applications = () => {
-	const { apps } = getData();
+	const {data: { apps }} = useGenericContext(DataContext);
 
 	if (apps.length === 0) return null;
 
 	return (
-		<section id="apps">
-			<h3>Applications</h3>
-			<div id="apps_loop">
-				{apps.map((app) => (
-					<div className="apps_item">
-						<div className="apps_icon">
-							<Icon icon={home} className="icon" />
+		<section className="Apps">
+			<h3>Applikationen</h3>
+			<div className="AppsLoop">
+				{apps.map(app => (
+					<div className="AppsItem" key={app.name}>
+						<div className="AppsIcon">
+							<DynamicIcon icon={app.icon} size="2.5em" />
 						</div>
-						<div className="apps_text">
-							<a href="localhost">Application 1</a>
-							<span id="app-address">localhost</span>
+						<div className="AppsText">
+							<a href={app.url}>{app.name}</a>
+							<span>{app.displayUrl}</span>
 						</div>
 					</div>
 				))}

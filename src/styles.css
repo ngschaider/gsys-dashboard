@@ -157,7 +157,7 @@ table td:nth-of-type(2) {
 
 table td {
 	border: thin solid #e4e4e4;
-	color: #333333;
+	color: var(--color-text-pri);
 	font-size: 1em;
 	overflow: hidden;
 	padding: 10px 5px;
@@ -166,7 +166,7 @@ table td {
 
 table th {
 	border: thin solid #e4e4e4;
-	color: #333333;
+	color: var(--color-text-pri);
 	font-weight: bold;
 	padding: 10px 5px;
 }

@@ -1,10 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, Context, createContext, FormEvent, useContext, useState } from "react";
 
 export const useForm = <T>(initialValues: T, onSubmitCb?: (values: T) => void, onChangeCb?: (values: T) => void) => {
 	const [values, setValues] = useState(initialValues);
 
-	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setValue(e.target.name, e.target.value);
+	const onChange = <T>(e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
+		setValue<T>(e.target.name, e.target.value);
 		onChangeCb?.(values);
 	};
 
@@ -13,16 +13,11 @@ export const useForm = <T>(initialValues: T, onSubmitCb?: (values: T) => void, o
 		onSubmitCb?.(values);
 	};
 
-	const setValue = (key: string, value: string) => {
+	const setValue = <T = string>(key: string, value: any) => {
 		setValues({
 			...values,
-			[key]: value
+			[key]: value as T
 		});
-	}
-
-	const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-		setValue(e.target.name, e.target.value);
-		onChangeCb?.(values);
 	}
 
 	return {
@@ -30,11 +25,19 @@ export const useForm = <T>(initialValues: T, onSubmitCb?: (values: T) => void, o
 		onChange,
 		onSubmit,
 		setValue,
-		onSelectChange,
 	};
 };
 
 
-export const useData = () => {
-	
-}
+export const createGenericContext = <T extends unknown>() => {
+	return createContext<T|undefined>(undefined);
+};
+
+export const useGenericContext = <T>(context: Context<T|undefined>): T => {
+	const value = useContext(context);
+	if(!value) {
+		throw new Error("useGenericContext must be used within a Provider");
+	}
+
+	return value;
+};

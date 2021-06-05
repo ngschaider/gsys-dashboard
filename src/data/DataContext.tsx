@@ -1,17 +1,41 @@
-import React, { createContext, PropsWithChildren } from "react";
-import DataManager from "./DataManager";
-import { AppData } from "./DataSource";
+import React, { PropsWithChildren, useEffect, useState } from "react";
+import { UserData } from "../API";
+import { createGenericContext } from "../utils/hooks";
+import DataManager, { AppData, DataManagerEvent } from "./DataManager";
 
 
+type DataContextValue = {
+    data: AppData,
+    user: UserData|null,
+    setData: (data: AppData) => void,
+}
 
-const dataManager = new DataManager();
-dataManager.refresh();
-
-export const DataContext = createContext<DataManager>(dataManager);
+export const DataContext = createGenericContext<DataContextValue>();
 
 export const DataProvider = (props: PropsWithChildren<{}>) => {
+    const [data, setData] = useState<AppData>(DataManager.data);
+    const [user, setUser] = useState<UserData|null>(DataManager.user);
+
+    useEffect(() => {
+        DataManager.on(DataManagerEvent.DataChanged, setData);
+        DataManager.on(DataManagerEvent.UserChanged, setUser);
+        
+        return () => {
+            DataManager.off(DataManagerEvent.DataChanged, setData);
+            DataManager.off(DataManagerEvent.UserChanged, setUser);
+        }
+    }, []);
+
     return (
-        <DataContext.Provider value={dataManager} {...props} />
+        <DataContext.Provider value={{
+            data: data,
+            user: user,
+            setData: (data: AppData) => {
+                // we get "this is undefined" if using dataManager.setData wihout wrapping function
+                // i don't know why.
+                DataManager.setData(data);
+            },
+        }} {...props} />
     );
 };
 

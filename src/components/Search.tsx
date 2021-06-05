@@ -43,6 +43,7 @@ const Search = () => {
 				type="text"
 				spellCheck={false}
 				onChange={onSearchInputChanged}
+				autoFocus
 			/>
 			<span onClick={sendToYoutube}>
 				<InlineIcon

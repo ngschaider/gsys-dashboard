@@ -1,18 +1,17 @@
-import { useForm } from "../../utils/hooks";
-import { getData, setData } from "../../data/DataManager";
+import { DataContext } from "../../data/DataContext";
+import { useForm, useGenericContext } from "../../utils/hooks";
 
 const GreetingSettings = () => {
-	const data = getData();
+	const {data, setData} = useGenericContext(DataContext);
 
-	const { values, onChange, onSubmit } = useForm(data.greeting, () => {
-		const newData = {
+	const { values, onChange, onSubmit } = useForm(data.greeting, values => {
+		setData({
 			...data,
 			greeting: {
 				message: values.message,
 				smallHeader: values.smallHeader,
 			}
-		}
-		setData(newData);
+		});
 	});
 
 	return (

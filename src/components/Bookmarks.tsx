@@ -1,7 +1,8 @@
-import { getData } from "../data/DataManager";
+import { DataContext } from "../data/DataContext";
+import { useGenericContext } from "../utils/hooks";
 
 const Bookmarks = () => {
-	const { bookmarkCategories, bookmarks } = getData();
+	const { data: {bookmarks, bookmarkCategories}} = useGenericContext(DataContext);
 
 	if (bookmarks.length === 0) return null;
 
