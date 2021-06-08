@@ -6,8 +6,8 @@ import ReplacerSettings from "./settings/ReplacerSettings";
 import "./Settings.css";
 import ServerSettings from "./settings/ServerSettings";
 import ApplicationsSettings from "./settings/ApplicationsSettings";
-import BookmarksSettings from "./settings/BookmarksSettings";
-import BookmarkCategoriesSettings from "./settings/BookmarkCategoriesSettings";
+import LinksSettings from "./settings/LinksSettings";
+import LinkCategoriesSettings from "./settings/LinkCategoriesSettings";
 
 const Settings = () => {
 	const [activePage, setActivePage] = useState("general");
@@ -30,8 +30,8 @@ const Settings = () => {
 			<select onChange={onDropdownChange} value={activePage}>
 				<option value="general">Grundlegendes</option>
 				<option value="greeting">Begrüßung</option>
-				<option value="bookmarkCategories">Lesezeichen-Kategorien</option>
-				<option value="bookmarks">Lesezeichen</option>
+				<option value="linkCategories">Lesezeichen-Kategorien</option>
+				<option value="links">Lesezeichen</option>
 				<option value="server">Server (SPICE)</option>
 				<option value="applications">Applikationen</option>
 				<option value="replacer">Ersetzer</option>
@@ -43,8 +43,8 @@ const Settings = () => {
 			<br />
 			{activePage === "general" && <GeneralSettings />}
 			{activePage === "greeting" && <GreetingSettings />}
-			{activePage === "bookmarkCategories" && <BookmarkCategoriesSettings />}
-			{activePage === "bookmarks" && <BookmarksSettings />}
+			{activePage === "linkCategories" && <LinkCategoriesSettings />}
+			{activePage === "links" && <LinksSettings />}
 			{activePage === "server" && <ServerSettings />}
 			{activePage === "applications" && <ApplicationsSettings />}
 			{activePage === "replacer" && <ReplacerSettings />}

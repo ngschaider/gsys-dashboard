@@ -1,5 +1,5 @@
 import React from "react";
-import "./Applications.css"
+import "./Apps.css"
 import { DataContext } from "../data/DataContext";
 import { useGenericContext } from "../utils/hooks";
 import DynamicIcon from "./DynamicIcon";
@@ -20,7 +20,7 @@ const Applications = () => {
 						</div>
 						<div className="AppsText">
 							<a href={app.url}>{app.name}</a>
-							<span>{app.displayUrl}</span>
+							<span className="AppAddress">{app.displayUrl}</span>
 						</div>
 					</div>
 				))}

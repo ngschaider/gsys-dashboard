@@ -61,7 +61,11 @@ class API {
         if(res.status === 200 && res.body) {
             const json = await res.json();
             if(json.type === "error") {
-                this.error(json.code, json.message);
+                if(json.code === "INVALID_TOKEN") {
+                    window.location.href = "https://accounts.gsys.at";
+                } else {
+                    this.error(json.code, json.message);
+                }
             }
 
             return json;

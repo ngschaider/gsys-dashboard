@@ -1,16 +1,19 @@
 import React from "react";
 import { IconBaseProps, IconType } from "react-icons/lib";
-import { SiProxmox } from "react-icons/all";
+import { SiProxmox, CgScreen } from "react-icons/all";
 
 
 export enum IconName {
 	None = "None",
 	SiProxmox = "SiProxmox",
+	CgScreen = "CgScreen",
 }
 
 const getIcon = (iconName: IconName): null|IconType => {
 	if(iconName === IconName.SiProxmox) {
 		return SiProxmox;
+	} else if(iconName === IconName.CgScreen) {
+		return CgScreen;
 	}
 
 	return null;

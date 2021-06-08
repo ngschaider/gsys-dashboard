@@ -38,6 +38,10 @@ body {
 	module-spacing: 3vh;
 }
 
+.hidden {
+	display: none;
+}
+
 /* TEXT STYLES */
 
 h1,

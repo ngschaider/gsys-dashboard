@@ -1,0 +1,49 @@
+
+.ServersLoop {
+	border-bottom: 0px solid var(--color-text-acc);
+	display: grid;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 64px;
+	padding-bottom: var(--module-spacing);
+}
+
+.ServersIcon {
+	height: 64px;
+	margin-right: 1em;
+	padding-top: 15px;
+}
+
+.ServersIcon span {
+	font-size: 2.5em;
+	line-height: 3rem;
+}
+
+.ServersItem {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	height: 64px;
+	margin: 0;
+}
+
+.ServersText {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex: 1;
+	overflow: hidden;
+}
+
+.ServersText a {
+	font-size: 1em;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.ServersText span {
+	color: var(--color-text-acc);
+	font-size: 0.8em;
+	text-transform: uppercase;
+}

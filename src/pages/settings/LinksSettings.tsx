@@ -1,36 +1,36 @@
 import { MouseEvent, useState } from "react";
 import { DataContext } from "../../data/DataContext";
-import { BookmarkConfig } from "../../data/DataManager";
+import { LinkConfig } from "../../data/DataManager";
 import { useForm, useGenericContext } from "../../utils/hooks";
 
-const BookmarksSettings = () => {
+const LinksSettings = () => {
 	const {data, setData} = useGenericContext(DataContext);
 
-    const categories = data.bookmarkCategories;
-    const [newBookmarks, setNewBookmarks] = useState<BookmarkConfig[]>(data.bookmarks);
+    const categories = data.linkCategories;
+    const [newLinks, setNewLinks] = useState<LinkConfig[]>(data.links);
 
-    const onDeleteClicked = (bookmarkToDelete: BookmarkConfig) => {
-        setNewBookmarks(newBookmarks.filter(bookmark => bookmark !== bookmarkToDelete));
+    const onDeleteClicked = (linkToDelete: LinkConfig) => {
+        setNewLinks(newLinks.filter(link => link !== linkToDelete));
     };
     
     const save = (e: MouseEvent<HTMLButtonElement>) => {
         setData({
             ...data,
-            bookmarks: newBookmarks,
+            links: newLinks,
         });
         alert("Speichern erfolgreich!");
     }
 
-    const {onChange, onSubmit, values} = useForm<BookmarkConfig>({
+    const {onChange, onSubmit, values} = useForm<LinkConfig>({
         name: "",
         url: "",
-        categoryId: data.bookmarkCategories[0]?.id ?? "",
+        categoryId: data.linkCategories[0]?.id ?? "",
     }, values => {
-        if(!values.name || !values.url || !values.categoryId || newBookmarks.find(bookmark => bookmark.name === values.name)) {
+        if(!values.name || !values.url || !values.categoryId || newLinks.find(link => link.name === values.name)) {
             return;
         }
-        setNewBookmarks([
-            ...newBookmarks,
+        setNewLinks([
+            ...newLinks,
             values,
         ]);
     });
@@ -68,15 +68,15 @@ const BookmarksSettings = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {newBookmarks.map(bookmark => (
-                        <tr key={bookmark.name}>
-                            <td>{bookmark.name}</td>
-                            <td>{bookmark.url}</td>
-                            <td>{categories.find(cat => cat.id === bookmark.categoryId)?.name || "<i>Nicht gefunden</i>"}</td>
-                            <td><button onClick={() => onDeleteClicked(bookmark)}>Löschen</button></td>
+                    {newLinks.map(link => (
+                        <tr key={link.name}>
+                            <td>{link.name}</td>
+                            <td>{link.url}</td>
+                            <td>{categories.find(cat => cat.id === link.categoryId)?.name || "<i>Nicht gefunden</i>"}</td>
+                            <td><button onClick={() => onDeleteClicked(link)}>Löschen</button></td>
                         </tr>
                     ))}
-                    {newBookmarks.length === 0 && (
+                    {newLinks.length === 0 && (
                         <tr>
                             <td colSpan={4}><i>Keine Einträge gefunden</i></td>
                         </tr>
@@ -87,4 +87,4 @@ const BookmarksSettings = () => {
         </>
 	);
 };
-export default BookmarksSettings;
+export default LinksSettings;

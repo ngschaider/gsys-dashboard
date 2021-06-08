@@ -1,3 +1,4 @@
+import "./Search.css"
 import InlineIcon from "@iconify/react";
 import React, { KeyboardEvent, useState } from "react";
 import YoutubeIcon from "@iconify/icons-cib/youtube";
@@ -44,6 +45,7 @@ const Search = () => {
 				spellCheck={false}
 				onChange={onSearchInputChanged}
 				autoFocus
+				className="SearchInput"
 			/>
 			<span onClick={sendToYoutube}>
 				<InlineIcon

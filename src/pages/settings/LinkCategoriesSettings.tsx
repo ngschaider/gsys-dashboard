@@ -1,26 +1,25 @@
 import { MouseEvent, useState } from "react";
-import { IconName } from "../../components/DynamicIcon";
 import { DataContext } from "../../data/DataContext";
-import { AppConfig, BookmarkConfig, Category } from "../../data/DataManager";
+import { LinkCategory } from "../../data/DataManager";
 import { useForm, useGenericContext } from "../../utils/hooks";
 
-const BookmarkCategoriesSettings = () => {
+const LinkCategoriesSettings = () => {
 	const {data, setData} = useGenericContext(DataContext);
-    const [newCategories, setNewCategories] = useState<Category[]>(data.bookmarkCategories);
+    const [newCategories, setNewCategories] = useState<LinkCategory[]>(data.linkCategories);
 
-    const onDeleteClicked = (categoryToDelete: Category) => {
+    const onDeleteClicked = (categoryToDelete: LinkCategory) => {
         setNewCategories(newCategories.filter(category => category !== categoryToDelete));
     };
     
     const save = (e: MouseEvent<HTMLButtonElement>) => {
         setData({
             ...data,
-            bookmarkCategories: newCategories,
+            linkCategories: newCategories,
         });
         alert("Speichern erfolgreich!");
     }
 
-    const {onChange, onSubmit, values} = useForm<Category>({
+    const {onChange, onSubmit, values} = useForm<LinkCategory>({
         id: "",
         name: "",
     }, values => {
@@ -75,4 +74,4 @@ const BookmarkCategoriesSettings = () => {
         </>
 	);
 };
-export default BookmarkCategoriesSettings;
+export default LinkCategoriesSettings;

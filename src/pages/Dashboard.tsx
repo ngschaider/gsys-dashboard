@@ -1,9 +1,10 @@
 import React from "react";
 import Header from "../components/Header";
-import Applications from "../components/Applications";
-import Bookmarks from "../components/Bookmarks";
+import Applications from "../components/Apps";
+import Links from "../components/Links";
 import SettingsButton from "../components/SettingsButton";
 import Search from "../components/Search";
+import Servers from "../components/Servers";
 
 const Dashboard = () => {
 	return (
@@ -17,7 +18,9 @@ const Dashboard = () => {
 
 				<Applications />
 
-				<Bookmarks />
+				<Servers />
+
+				<Links />
 			</main>
 		</>
 	);

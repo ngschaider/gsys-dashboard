@@ -2,7 +2,7 @@ import EventEmitter from "events";
 import API, { UserData } from "../API";
 import { IconName } from "../components/DynamicIcon";
 
-export type BookmarkConfig = {
+export type LinkConfig = {
 	url: string;
 	name: string;
 	categoryId: string;
@@ -15,7 +15,7 @@ export type AppConfig = {
 	displayUrl: string;
 };
 
-export type Category = {
+export type LinkCategory = {
 	id: string;
 	name: string;
 };
@@ -25,20 +25,25 @@ export type GreetingConfig = {
 	message: string;
 };
 
+export type ServerConfig = {
+    id: number;
+    name: string;
+}
+
 export type ReplacerConfig = Record<string, string>;
 
 export type AppData = {
-	bookmarkCategories: Category[];
-	bookmarks: BookmarkConfig[];
+	linkCategories: LinkCategory[];
+	links: LinkConfig[];
 	apps: AppConfig[];
 	greeting: GreetingConfig;
     replacer: ReplacerConfig;
-    serverIds: number[];
+    servers: ServerConfig[];
 };
 
 const defaultData = {
-    bookmarkCategories: [],
-    bookmarks: [],
+    linkCategories: [],
+    links: [],
     apps: [],
     greeting: {
         smallHeader: "{date}",
@@ -46,7 +51,7 @@ const defaultData = {
     },
     replacer: {},
     themes: [],
-    serverIds: [],
+    servers: [],
 };
 
 export enum DataManagerEvent {
