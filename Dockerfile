@@ -1,15 +1,16 @@
-FROM node:15 AS gsys-dashboard-build
-RUN npm install -g npm@7.19.0
-WORKDIR /compile
-COPY ./ ./
-RUN npm install
-RUN npm run build
+# build environment
+FROM node:18 AS build
+WORKDIR /app
 
-FROM httpd:2.4
-WORKDIR /usr/local/apache2/htdocs
 COPY package.json ./
 COPY package-lock.json ./
-COPY --from=gsys-dashboard-build /compile/build/ ./
-COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+RUN npm ci
 
+COPY ./ ./
+RUN npm run build
+
+# production environmnt
+FROM nginx:stable-alpine
+COPY --from=build /app/build/ /usr/local/apache2/htdocs
 EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

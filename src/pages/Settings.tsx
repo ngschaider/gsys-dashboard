@@ -1,13 +1,12 @@
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import GeneralSettings from "./settings/GeneralSettings";
 import { Redirect } from "react-router-dom";
 import GreetingSettings from "./settings/GreetingSettings";
-import ReplacerSettings from "./settings/ReplacerSettings";
 import "./Settings.css";
 import ServerSettings from "./settings/ServerSettings";
-import ApplicationsSettings from "./settings/ApplicationsSettings";
-import LinksSettings from "./settings/LinksSettings";
-import LinkCategoriesSettings from "./settings/LinkCategoriesSettings";
+import AppSettings from "./settings/AppSettings";
+import BookmarkSettings from "./settings/BookmarkSettings";
+import BookmarkCategorySettings from "./settings/BookmarkCategorySettings";
 
 const Settings = () => {
 	const [activePage, setActivePage] = useState("general");
@@ -43,11 +42,10 @@ const Settings = () => {
 			<br />
 			{activePage === "general" && <GeneralSettings />}
 			{activePage === "greeting" && <GreetingSettings />}
-			{activePage === "linkCategories" && <LinkCategoriesSettings />}
-			{activePage === "links" && <LinksSettings />}
+			{activePage === "linkCategories" && <BookmarkCategorySettings />}
+			{activePage === "links" && <BookmarkSettings />}
 			{activePage === "server" && <ServerSettings />}
-			{activePage === "applications" && <ApplicationsSettings />}
-			{activePage === "replacer" && <ReplacerSettings />}
+			{activePage === "applications" && <AppSettings />}
 
 			<br />
 			<button onClick={onCloseClicked}>Schließen</button>

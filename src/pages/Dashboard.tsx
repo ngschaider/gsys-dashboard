@@ -1,7 +1,6 @@
-import React from "react";
 import Header from "../components/Header";
 import Applications from "../components/Apps";
-import Links from "../components/Links";
+import Bookmarks from "../components/Bookmarks";
 import SettingsButton from "../components/SettingsButton";
 import Search from "../components/Search";
 import Servers from "../components/Servers";
@@ -20,7 +19,7 @@ const Dashboard = () => {
 
 				<Servers />
 
-				<Links />
+				<Bookmarks />
 			</main>
 		</>
 	);

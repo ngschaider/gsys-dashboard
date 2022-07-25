@@ -4,15 +4,12 @@ import { replaceAll } from "../utils/replace";
 import "./Header.css"
 
 const Header = () => {
-	const {data: {greeting: {message, smallHeader}, replacer}} = useGenericContext(DataContext);
-	
-	const formattedGreeting = replaceAll(message, replacer);
-	const formattedSmallHeader = replaceAll(smallHeader, replacer);
+	const {data: {greeting: {message, smallHeader}}} = useGenericContext(DataContext);
 
 	return (
 		<section id="header">
-			<h2 id="header_small">{formattedSmallHeader}</h2>
-			<h1 id="header_greet">{formattedGreeting}</h1>
+			<h2 id="header_small">{replaceAll(smallHeader)}</h2>
+			<h1 id="header_greet">{replaceAll(message)}</h1>
 		</section>
 	);
 };

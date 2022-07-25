@@ -8,7 +8,7 @@ export const buildQueryString = (data: Record<string,string>) => {
 }
 
 export const getQueryParameter = (parameterName: string): string|null => {
-    const encodedParts = window.location.search.substr(1).split("&");
+    const encodedParts = window.location.search.substring(1).split("&");
     const kvPairs = encodedParts.map(encodedPart => encodedPart.split("="));
 
     const kv = kvPairs.find(kv => kv[0] === parameterName);

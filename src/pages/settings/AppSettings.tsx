@@ -4,7 +4,7 @@ import { DataContext } from "../../data/DataContext";
 import { AppConfig } from "../../data/DataManager";
 import { useForm, useGenericContext } from "../../utils/hooks";
 
-const ApplicationsSettings = () => {
+const AppSettings = () => {
 	const {data, setData} = useGenericContext(DataContext);
     const [newApps, setNewApps] = useState<AppConfig[]>(data.apps);
 
@@ -98,4 +98,4 @@ const ApplicationsSettings = () => {
         </>
 	);
 };
-export default ApplicationsSettings;
+export default AppSettings;
