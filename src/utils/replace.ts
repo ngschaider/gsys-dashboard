@@ -1,4 +1,3 @@
-import DataManager from "../data/DataManager";
 
 const replacer: Record<string, (options?: Record<string,string>) => string> = {
 	date: (options: any) => {
@@ -10,14 +9,6 @@ const replacer: Record<string, (options?: Record<string,string>) => string> = {
 			day: "numeric"
 		});
 		return dateString;
-	},
-	firstName: (options: any) => {
-		const firstName = DataManager.data?.firstName;
-		return firstName ?? "";
-	},
-	lastName: (options: any) => {
-		const lastName = DataManager.data?.lastName;
-		return lastName ?? "";
 	},
 };
 
@@ -31,8 +22,9 @@ export const replace = (input: string, replacerName: string) => {
 };
 
 export const replaceAll = (input: string) => {
-	input = replace(input, "date");
-	input = replace(input, "firstName");
+	for(const [key] of Object.entries(replacer)) {
+		input = replace(input, key);
+	}
 
 	return input;
 };

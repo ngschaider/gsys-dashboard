@@ -1,4 +1,3 @@
-import EventEmitter from "events";
 import { IconName } from "../components/DynamicIcon";
 
 export type AppConfig = {
@@ -39,48 +38,13 @@ export type Data = {
     servers: ServerConfig[];
 };
 
-const defaultData = {
+export const defaultData = {
     apps: [],
     greeting: {
         message: "Hello",
         smallHeader: "{date}",
     },
-    firstName: "Max",
-    lastName: "Mustermann",
     bookmarks: [],
     bookmarkCategories: [],
     servers: [],
 };
-
-export enum DataManagerEvent {
-    DataChanged = "DataChanged",
-    DataExported = "DataExported",
-    DataImported = "DataImported",
-    InitComplete = "InitComplete",
-};
-
-class DataManager extends EventEmitter {
-
-    public initializing: boolean = true;
-    private _data: Data = defaultData;
-
-    public get data() {
-        return this._data;
-    }
-
-    public async setData(data: Data) {
-        this._data = data;
-        this.emit(DataManagerEvent.DataChanged, this.data);
-    }
-    
-    public async export() {
-
-    }
-
-    public async import(file: File) {
-
-    }
-
-}
-
-export default new DataManager();
