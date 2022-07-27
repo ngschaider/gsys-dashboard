@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import GeneralSettings from "./settings/GeneralSettings";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import GreetingSettings from "./settings/GreetingSettings";
 import "./Settings.css";
 import ServerSettings from "./settings/ServerSettings";
@@ -23,7 +23,7 @@ const Settings = () => {
 
 	return (
 		<div className="container fade Settings">
-			{redirect && <Redirect to="/" />}
+			{redirect && <Navigate to="/" />}
 			<h1>Settings</h1>
 
 			<select onChange={onDropdownChange} value={activePage}>

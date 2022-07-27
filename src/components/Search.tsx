@@ -1,8 +1,7 @@
 import "./Search.css"
-import InlineIcon from "@iconify/react";
+import { AiFillYoutube } from "react-icons/ai";
+import { SiDuckduckgo } from "react-icons/si";
 import React, { KeyboardEvent, useState } from "react";
-import YoutubeIcon from "@iconify/icons-cib/youtube";
-import DuckDuckGoIcon from "@iconify/icons-cib/duckduckgo";
 
 const Search = () => {
 	const [searchInput, setSearchInput] = useState("");
@@ -48,18 +47,10 @@ const Search = () => {
 				className="SearchInput"
 			/>
 			<span onClick={sendToYoutube}>
-				<InlineIcon
-					icon={YoutubeIcon}
-					className="icon-button"
-					height="20px"
-				/>
+				<AiFillYoutube className="icon-button" height="20px" />
 			</span>
 			<span onClick={sendToDuckDuckGo}>
-				<InlineIcon
-					icon={DuckDuckGoIcon}
-					className="icon-button"
-					height="20px"
-				/>
+				<SiDuckduckgo className="icon-button" height="20px" />
 			</span>
 		</section>
 	);

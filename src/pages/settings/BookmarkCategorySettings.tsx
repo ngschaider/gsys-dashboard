@@ -38,11 +38,11 @@ const BookmarkCategorySettings = () => {
             <br />
             <form onSubmit={onSubmit}>
                 <span>Name</span><br />
-                <input type="text" name="id" value={values.name} onChange={onChange} />
+                <input type="text" name="name" value={values.name} onChange={onChange} />
                 <br />
                 <br />
                 <span>Anzeigename</span><br />
-                <input type="text" name="name" value={values.displayName} onChange={onChange} />
+                <input type="text" name="displayName" value={values.displayName} onChange={onChange} />
                 <br />
                 <br />
                 <input type="submit" value="Hinzufügen" /> 

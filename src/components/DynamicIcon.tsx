@@ -1,12 +1,16 @@
-import React from "react";
 import { IconBaseProps, IconType } from "react-icons/lib";
-import { SiProxmox, CgScreen } from "react-icons/all";
-
+import { SiProxmox, SiPortainer } from "react-icons/si";
+import { CgScreen } from "react-icons/cg";
+import { SiNginx } from "react-icons/si";
+import { BsKeyFill } from "react-icons/bs";
 
 export enum IconName {
 	None = "None",
 	SiProxmox = "SiProxmox",
 	CgScreen = "CgScreen",
+	SiPortainer = "SiPortainer",
+	SiNginx = "SiNginx",
+	BsKeyFill = "BsKeyFill",
 }
 
 const getIcon = (iconName: IconName): null|IconType => {
@@ -14,6 +18,12 @@ const getIcon = (iconName: IconName): null|IconType => {
 		return SiProxmox;
 	} else if(iconName === IconName.CgScreen) {
 		return CgScreen;
+	} else if(iconName === IconName.SiPortainer) {
+		return SiPortainer;
+	} else if(iconName === IconName.SiNginx) {
+		return SiNginx;
+	} else if(iconName === IconName.BsKeyFill) {
+		return BsKeyFill;
 	}
 
 	return null;
